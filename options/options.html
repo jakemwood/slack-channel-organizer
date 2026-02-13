@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Slack Channel Organizer - Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Slack Channel Organizer</h1>
+      <p class="subtitle">Automatically organize channels into sections based on rules</p>
+    </header>
+
+    <section class="settings-section">
+      <h2>General Settings</h2>
+      <div class="setting-row">
+        <label for="enabled">
+          <span class="setting-label">Enable auto-organize</span>
+          <span class="setting-description">Automatically organize channels when Slack loads</span>
+        </label>
+        <input type="checkbox" id="enabled" checked>
+      </div>
+    </section>
+
+    <section class="rules-section">
+      <div class="section-header">
+        <h2>Rules</h2>
+        <p class="hint">Rules are matched in order - first match wins. Drag to reorder.</p>
+      </div>
+
+      <div id="rules-list" class="rules-list">
+        <!-- Rules will be rendered here -->
+      </div>
+
+      <button id="add-rule" class="btn primary">+ Add Rule</button>
+    </section>
+
+    <section class="import-export-section">
+      <h2>Import / Export</h2>
+      <div class="button-row">
+        <button id="export-btn" class="btn">Export Rules</button>
+        <button id="import-btn" class="btn">Import Rules</button>
+        <input type="file" id="import-file" accept=".json" hidden>
+      </div>
+    </section>
+  </div>
+
+  <!-- Rule Edit Modal -->
+  <div id="rule-modal" class="modal" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <h3 id="modal-title">Add Rule</h3>
+      <form id="rule-form">
+        <input type="hidden" id="rule-id">
+
+        <div class="form-group">
+          <label for="rule-name">Rule Name</label>
+          <input type="text" id="rule-name" placeholder="e.g., Engineering Channels" required>
+        </div>
+
+        <div class="form-group">
+          <label for="rule-type">Match Type</label>
+          <select id="rule-type" required>
+            <option value="startsWith">Starts with</option>
+            <option value="endsWith">Ends with</option>
+            <option value="contains">Contains</option>
+            <option value="exact">Exact match</option>
+            <option value="regex">Regular expression</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="rule-pattern">Pattern</label>
+          <input type="text" id="rule-pattern" placeholder="e.g., eng-" required>
+          <span class="hint" id="pattern-hint">Channel names starting with this text will match</span>
+        </div>
+
+        <div class="form-group">
+          <label for="rule-section">Target Section</label>
+          <input type="text" id="rule-section" placeholder="e.g., Engineering" required>
+          <span class="hint">The section name in Slack (must already exist)</span>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancel-btn" class="btn">Cancel</button>
+          <button type="submit" class="btn primary">Save Rule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../shared/storage.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

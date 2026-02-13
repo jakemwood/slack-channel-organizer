@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <h1>Slack Channel Organizer</h1>
+
+    <div class="toggle-row">
+      <label for="enabled">Enabled</label>
+      <input type="checkbox" id="enabled" checked>
+    </div>
+
+    <div class="stats">
+      <span id="rule-count">0</span> rules configured
+    </div>
+
+    <div class="actions">
+      <button id="organize-now" class="btn primary">Organize Now</button>
+      <button id="open-settings" class="btn">Settings</button>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script src="../shared/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
